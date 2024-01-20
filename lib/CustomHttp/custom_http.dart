@@ -121,6 +121,7 @@ class CustomHttp{
   }
 
 
+
   /// REnt Collection
   fetchRentCollection(BuildContext context,String rent_Id,String amount)async{
     String link="${BaseUrl}/api/rent-collection";
@@ -137,10 +138,13 @@ class CustomHttp{
 
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             duration: Duration(milliseconds: 500),
-            content: Text("Paid Success")));
+            content: Text("Paid Successful")));
         GetStorage().write("DueAmount", null);
         Future.delayed(Duration(milliseconds: 300),() {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => InvoiceScreen(),));
+          getInvoiceHttp("${data["data"]["invoice_id"]}");
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => InvoiceScreen(
+            invoice_id:"${data["data"]["invoice_id"]}" ,
+          ),));
         },);
       }else{
         // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -148,8 +152,44 @@ class CustomHttp{
         //     content: Text("Wrong Email or Password ")));
       }
     }catch(e){
-      print("Login Error=== $e");
+      print("rent collection=== $e");
     }
   }
 
+
+  ///-----Get Report Section  ------------///
+List report_list=[];
+  getReportHttp(BuildContext context ,String f_date,String l_date,String PageId) async {
+    print("tokennnnnnnnnn ==>${GetStorage().read("api_token")}");
+    try{
+      Response response = await http.get(
+          Uri.parse('${BaseUrl}/api/user-collection-report?from_date=${f_date}&to_date=${l_date}&page=${PageId}'),headers: headers
+      );
+      print("report_list  ====> ${response.body}");
+      var data = jsonDecode(response.body);
+      report_list=data["data"]["data"];
+    }catch(e){
+      print(e);
+    }
+    return report_list;
+  }
+
+
+  ///-----DeuAmount Section  ------------///
+
+  getInvoiceHttp(String invoice_id) async {
+    print("tokennnnnnnnnn ==>${GetStorage().read("api_token")}");
+    print(invoice_id);
+    try{
+      Response response = await http.get(
+          Uri.parse('https://bill.matrechaya.com/api/rent-collection-invoice/${invoice_id}'),headers: headers
+      );
+      print("invoice  ====> ${response.body}");
+      var data = jsonDecode(response.body);
+      print(data);
+      GetStorage().write("invoice", data["data"]);
+    }catch(e){
+      print(e);
+    }
+  }
 }

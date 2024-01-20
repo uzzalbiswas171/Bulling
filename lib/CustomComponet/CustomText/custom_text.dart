@@ -16,11 +16,18 @@ class CustomTText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '$text',
-      style: GoogleFonts.roboto(
+      // style: GoogleFonts.poppins(
+      //     fontSize: 15 ,
+      //     fontWeight: FontWeight.w500,
+      //     color: Colors.black87,
+      //     letterSpacing: 0.30
+      // ),
+      style: GoogleFonts.poppins(
           fontSize: fontSize ,
           fontWeight: fontWeight,
-          color: textcolor
-      ),
+          color: Colors.black87,
+        letterSpacing: 0.30
+       ),
     );
   }
 }
