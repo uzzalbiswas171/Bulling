@@ -33,3 +33,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+
+//GetStorage().write("DueAmount", data[data]);

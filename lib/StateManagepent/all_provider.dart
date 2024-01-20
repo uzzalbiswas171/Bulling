@@ -5,18 +5,56 @@ import 'package:flutter/material.dart';
 
 class AllProvider with ChangeNotifier{
 
-  int _count = 0;
-
-  int get count => _count;
-
-  void increment() {
-    _count++;
-    notifyListeners();
-  }
-
   List markets=[];
   fetchMarketProvider()async{
     markets=await CustomHttp().getMarketHttp();
+    notifyListeners();
+  }
+
+  List floors=[];
+  fetchfloorprovider(String market_id,String floor_id,String block_id,String Shop_id)async{
+    floors=await CustomHttp().getFloorHttp(
+      market_id,floor_id,block_id,Shop_id
+    );
+    notifyListeners();
+  }
+
+
+  List blocks=[];
+  fetchBlockprovider(String floor_id)async{
+    blocks=await CustomHttp().getBlockHttp(
+        floor_id
+    );
+    notifyListeners();
+  }
+
+  List shops=[];
+  fetchShopprovider(String block_id)async{
+    shops=await CustomHttp().getShopHttp(
+        block_id
+    );
+    notifyListeners();
+  }
+
+
+  fetchDueAmmountprovider(String shop_id)async{
+  final data =await CustomHttp().getDueAmmountHttp(
+      shop_id
+    );
+  notifyListeners();
+  }
+
+  fetchDueAmmounByShopIDprovider(String shop_id)async{
+  final data =await CustomHttp().getDueAmmounByShopIDtHttp(
+      shop_id
+    );
+  notifyListeners();
+  }
+
+
+  fetchfetchRentCollectionprovider(BuildContext context,String rent_Id,String amount)async{
+  final data =await CustomHttp().fetchRentCollection(context,rent_Id, amount);
+  notifyListeners();
   }
 
 

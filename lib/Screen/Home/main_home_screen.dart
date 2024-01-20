@@ -5,6 +5,7 @@ import 'package:billingapps/Screen/Report/report.dart';
 import 'package:billingapps/StateManagepent/all_provider.dart';
 import 'package:billingapps/constss.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
   @override
   void initState() {
     Provider.of<AllProvider>(context,listen: false).fetchMarketProvider();
+    GetStorage().write("DueAmount", null);
     // TODO: implement initState
     super.initState();
   }
@@ -42,7 +44,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color(0xffe3d9d9),
+                color: backsection,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
