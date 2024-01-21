@@ -294,7 +294,6 @@ class _CollectionScreenState extends State<CollectionScreen> {
                                 if(_shopIdController.text.isNotEmpty){
                                   Provider.of<AllProvider>(context,listen: false).fetchDueAmmounByShopIDprovider(_shopIdController.text);
                                   setState(() {
-                                    _shopIdController.text="";
                                   });
                                 }else{
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please Enter Shop ID')));
@@ -340,6 +339,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                                 border: Border.all(width: 1,color: Colors.black87)
                             ),
                            child:TextFormField(
+                             keyboardType: TextInputType.number,
                              controller: _amountController,
                              decoration: InputDecoration(
                                border: InputBorder.none,
@@ -359,8 +359,14 @@ class _CollectionScreenState extends State<CollectionScreen> {
                                 //  border: Border.all(width: 1,color: Colors.black87)
                               ),
                               child:    CustomButton(onTap: () {
+                                print("rentd id===>  ${GetStorage().read("DueAmount")["rent_id"]}");
                                 if(_amountController.text.isNotEmpty){
-                                  Provider.of<AllProvider>(context,listen: false).fetchfetchRentCollectionprovider(context,"${GetStorage().read("DueAmount")["rent_id"]}", _amountController.text);
+                                  if(int.parse("${GetStorage().read("DueAmount")["due"]}")>=int.parse("${_amountController.text}") ){
+                                    Provider.of<AllProvider>(context,listen: false).fetchfetchRentCollectionprovider(context,"${GetStorage().read("DueAmount")["rent_id"]}", _amountController.text);
+                                  }else{
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Insufficient Due')));
+
+                                  }
                                   setState(() {
                                     _amountController.text="";
                                   });

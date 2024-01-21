@@ -59,8 +59,9 @@ class AllProvider with ChangeNotifier{
   notifyListeners();
   }
 
+  dynamic invoice;
   fetchInvoiceprovider(String invoice_id)async{
-  final data =await CustomHttp().getInvoiceHttp(invoice_id);
+   invoice =await CustomHttp().getInvoiceHttp(invoice_id);
   notifyListeners();
   }
 

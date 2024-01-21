@@ -133,15 +133,15 @@ class CustomHttp{
       Response response=await http.post(Uri.parse(link),body: body,headers: headers);
       print(response.body);
       var data=jsonDecode(response.body);
-      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ${amount}");
-      if(response.statusCode==200){
+      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ${data}");
 
+      if(response.statusCode==200){
+        getInvoiceHttp("${data["data"]["invoice_id"]}");
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            duration: Duration(milliseconds: 500),
+            duration: Duration(milliseconds: 200),
             content: Text("Paid Successful")));
-        GetStorage().write("DueAmount", null);
-        Future.delayed(Duration(milliseconds: 300),() {
-          getInvoiceHttp("${data["data"]["invoice_id"]}");
+        Future.delayed(Duration(seconds: 2),() {
+          print("rent iddddddedd >>>>> ${data["data"]["invoice_id"]}");
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => InvoiceScreen(
             invoice_id:"${data["data"]["invoice_id"]}" ,
           ),));
@@ -176,20 +176,21 @@ List report_list=[];
 
 
   ///-----DeuAmount Section  ------------///
-
+  dynamic invoice;
   getInvoiceHttp(String invoice_id) async {
     print("tokennnnnnnnnn ==>${GetStorage().read("api_token")}");
-    print(invoice_id);
+    print("iddddddd>>>>>> $invoice_id");
     try{
       Response response = await http.get(
           Uri.parse('https://bill.matrechaya.com/api/rent-collection-invoice/${invoice_id}'),headers: headers
       );
       print("invoice  ====> ${response.body}");
-      var data = jsonDecode(response.body);
-      print(data);
-      GetStorage().write("invoice", data["data"]);
+      invoice = jsonDecode(response.body);
+      print("dddddddddddddddddddddddddddddd>${invoice}");
+      // GetStorage().write("invoice", invoice["data"]);
     }catch(e){
       print(e);
     }
+    return invoice;
   }
 }

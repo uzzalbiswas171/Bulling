@@ -20,211 +20,215 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
   }
   @override
   Widget build(BuildContext context) {
+   final invoice= Provider.of<AllProvider>(context).invoice;
+   print("----------------------------------------${invoice}");
     return Scaffold(
-      body: GetStorage().read("invoice")==null? Center(child: CircularProgressIndicator(),) : Container(
+      body: Container(
         height: double.infinity,
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 70,
-              width: double.infinity,
-            ),
-            Container(
-              height: 70,
-              width: double.infinity,
-              child: Row(
-                children: [
-                  CustomTText(
-                      text: "Money Recipt",
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      textcolor: Colors.black87),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        CustomTText(
-                            text: "Mr No : 1001",
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            textcolor: Colors.black87),
-                        CustomTText(
-                            text: "Date : 2024-01-20",
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            textcolor: Colors.black87)
-                      ],
-                    ),
-                  )
-                ],
+        child: "${invoice}"=="null"?Center(child: CircularProgressIndicator(),):SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 70,
+                width: double.infinity,
               ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Divider(
-              height: 3,
-              color: Colors.black87,
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Container(
-              width: double.infinity,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Container(
+              Container(
+                height: 70,
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    CustomTText(
+                        text: "Money Recipt",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        textcolor: Colors.black87),
+                    Expanded(
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomTText(
-                              text: "From",
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              textcolor: Colors.black87),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          CustomTText(
-                              text: "Gawsia Corporation Ltd.",
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              textcolor: Colors.black87),
-                          CustomTText(
-                              text:
-                                  "Gawsia Market, Bhulta, Rupgonj, Narayanganj. \n\nRecived By: Admin",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              textcolor: Colors.black87),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           CustomTText(
-                              text: "To",
+                              text: "Mr No : 1001",
                               fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              textcolor: Colors.black87),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          CustomTText(
-                              text: "${GetStorage().read("invoice")["to_name"]}",
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               textcolor: Colors.black87),
                           CustomTText(
-                              text: "${GetStorage().read("invoice")["to_phone"]}",
+                              text: "Date : 2024-01-20",
                               fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              textcolor: Colors.black87),
+                              fontWeight: FontWeight.w500,
+                              textcolor: Colors.black87)
                         ],
                       ),
-                    ),
-                  ),
-                ],
+                    )
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Table(
-                border: TableBorder.all(),
-                // Allows to add a border decoration around your table
-                children: [
-                  TableRow(children: [
-                    Center(
-                        child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text('SI'),
-                    )),
-                    Center(
-                        child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text('Shop Details'),
+              SizedBox(
+                height: 5,
+              ),
+              Divider(
+                height: 3,
+                color: Colors.black87,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                width: double.infinity,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomTText(
+                                text: "From",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                textcolor: Colors.black87),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            CustomTText(
+                                text: "Gawsia Corporation Ltd.",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                textcolor: Colors.black87),
+                            CustomTText(
+                                text:
+                                    "Gawsia Market, Bhulta, Rupgonj, Narayanganj. \n\nRecived By: Admin",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                textcolor: Colors.black87),
+                          ],
+                        ),
                       ),
-                    )),
-                    Center(
-                        child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text('Rent Type'),
-                    )),
-                    Center(
-                        child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text('Amount'),
-                    )),
-                  ]),
-                  TableRow(children: [
-                    Center(child: Text('01')),
-                    Center(
-                        child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('${GetStorage().read("invoice")["shop_details"]}'),
-                    )),
-                    Center(child: Text('${GetStorage().read("invoice")["rent_type"]}')),
-                    Center(child: Text('${GetStorage().read("invoice")["amount"]}')),
-                  ]),
-                ]),
-            Table(
-                border: TableBorder.all(),
-                // Allows to add a border decoration around your table
-                children: [
-                  TableRow(children: [
-                    Center(
-                        child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text('Amount'),
-                    )),
-                    Center(
-                        child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text('${GetStorage().read("invoice")["amount"]}'),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            CustomTText(
+                                text: "To",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                textcolor: Colors.black87),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            CustomTText(
+                                text: "${invoice["data"]["to_name"]}",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                textcolor: Colors.black87),
+                            CustomTText(
+                                text: "${invoice["data"]["to_phone"]}",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                textcolor: Colors.black87),
+                          ],
+                        ),
                       ),
-                    )),
-                  ]),
-                  TableRow(children: [
-                    Center(child: Text('Total Due')),
-                    Center(
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Table(
+                  border: TableBorder.all(),
+                  // Allows to add a border decoration around your table
+                  children: [
+                    TableRow(children: [
+                      Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text('SI'),
+                      )),
+                      Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(5.0),
                         child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('${GetStorage().read("invoice")["current_due"]}'),
-                    )),
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text('Shop Details'),
+                        ),
+                      )),
+                      Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text('Rent Type'),
+                      )),
+                      Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text('Amount'),
+                      )),
+                    ]),
+                    TableRow(children: [
+                      Center(child: Text('01')),
+                      Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('${invoice["data"]["shop_details"]}'),
+                      )),
+                      Center(child: Text('${invoice["data"]["rent_type"]}')),
+                      Center(child: Text('${invoice["data"]["amount"]}')),
+                    ]),
                   ]),
-                ]),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                CustomTText(text: "In Word : ", fontSize: 15, fontWeight: FontWeight.bold, textcolor: Colors.black87),
-                CustomTText(text: "${GetStorage().read("invoice")["amount_in_words"]}", fontSize: 15, fontWeight: FontWeight.w600, textcolor: Colors.black87),
-              ],
-            )
-          ],
+              Table(
+                  border: TableBorder.all(),
+                  // Allows to add a border decoration around your table
+                  children: [
+                    TableRow(children: [
+                      Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text('Amount'),
+                      )),
+                      Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text('${invoice["data"]["amount"]}'),
+                        ),
+                      )),
+                    ]),
+                    TableRow(children: [
+                      Center(child: Text('Total Due')),
+                      Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('${invoice["data"]["current_due"]}'),
+                      )),
+                    ]),
+                  ]),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  CustomTText(text: "In Word : ", fontSize: 15, fontWeight: FontWeight.bold, textcolor: Colors.black87),
+                  CustomTText(text: "${invoice["data"]["amount_in_words"]}", fontSize: 15, fontWeight: FontWeight.w600, textcolor: Colors.black87),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
